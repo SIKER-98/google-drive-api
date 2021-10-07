@@ -8,9 +8,10 @@ router.get('/:gdrive', folderOperations.getFolders)
 router.get('/:gdrive/root', folderOperations.getFolderRootId)
 router.post('/:gdrive', folderOperations.createFolder)
 router.put('/:gdrive/folderName', folderOperations.updateFolderName)
+router.put('/:gdrive/color', folderOperations.changeFolderColor)
 router.get('/:gdrive/:folderId', folderOperations.getFolderChildren)
 router.delete('/:gdrive/:folderId', folderOperations.deleteFolder)
-router.put('/:gdrive/color', folderOperations.changeFolderColor)
+
 
 router.use((req, res) => {
     res.status(404).json({

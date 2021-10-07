@@ -2,6 +2,7 @@
 
 const fileTypes = require('../consts/fileTypes')
 const responseTypes = require("../consts/responseTypes");
+const {folderMove} = require("../services/folderServices/folderMove");
 const {folderChangeColor} = require("../services/folderServices/folderChangeColor");
 const {folderGetChildrens} = require("../services/folderServices/folderGetChildrens");
 const {gDriveAuthorisation} = require("../services/gDriveAuthorisation");
@@ -53,6 +54,22 @@ exports.changeFolderColor = async (req, res) => {
         return res.status(responseTypes.InternalServerError).json({
             error: e,
             message: 'Problem with folderController-changeFolderColor'
+        })
+    }
+}
+
+exports.updateFolderParent = async (req, res) => {
+    try {
+        const {gdrive} = req.params
+        const {folderId, newParentId, oldParentId} = req.body
+
+        const response = await gDriveAuthorisation(gdrive, folderMove, {folderId, newParentId, oldParentId})
+        return res.status(response.status).json({})
+
+    } catch (e) {
+        return res.status(responseTypes.InternalServerError).json({
+            error: e,
+            message: 'Problem with folderController-updateFolderParent'
         })
     }
 }
