@@ -1,5 +1,6 @@
 const fileTypes = require('../../consts/fileTypes')
 const responseTypes = require('../../consts/responseTypes')
+const {Logger} = require("../Logger");
 
 exports.folderGetChildrens = async (drive, data) => {
     const {folderId} = data
@@ -10,13 +11,18 @@ exports.folderGetChildrens = async (drive, data) => {
     })
         .then(res => {
             const fileList = res.data.files
-            console.log(new Date().toJSON(), 'folderGetChildren', fileList.length)
+            Logger.logOk(`folderGetChildren ${fileList.length}`)
+            // console.log(new Date().toJSON(), 'folderGetChildren', fileList.length)
             return {
-                status:responseTypes.Ok,
-                data:{fileList}
+                status: responseTypes.Ok,
+                data: {fileList}
             }
         })
-        .catch(e=>{
-            console.log(new Date().toJSON(), 'folderGetChildren FAILED')
+        .catch(e => {
+            // Logger.logError('folderGetChildren FAILED')
+            // console.log(new Date().toJSON(), 'folderGetChildren FAILED')
+            return {
+                status: responseTypes.NotFound
+            }
         })
 }

@@ -1,5 +1,6 @@
 const fileTypes = require('../../consts/fileTypes')
 const responseTypes = require('../../consts/responseTypes')
+const {Logger} = require("../Logger");
 
 exports.folderChangeColor = async (drive, data) => {
     const {folderId, newColor} = data
@@ -11,13 +12,15 @@ exports.folderChangeColor = async (drive, data) => {
         }
     })
         .then(res => {
-            console.log(new Date().toJSON(), 'folderChangeColor', folderId, newColor)
+            Logger.logOk(`folderColorChanged ${folderId} ${newColor}`)
+            // console.log(new Date().toJSON(), 'folderChangeColor', folderId, newColor)
             return {
-                status:responseTypes.NoContent
+                status: responseTypes.NoContent
             }
         })
         .catch(e => {
-            console.log(new Date().toJSON(), 'folderChangeColor FAILED', folderId, newColor)
+            Logger.logError(`folderChangeColor ${folderId} FAILED`)
+            // console.log(new Date().toJSON(), 'folderChangeColor FAILED', folderId, newColor)
             return {
                 status: responseTypes.NotFound
             }

@@ -1,5 +1,6 @@
 const fileTypes = require('../../consts/fileTypes')
 const responseTypes = require('../../consts/responseTypes')
+const {Logger} = require("../Logger");
 // const drive = require('../../config/gdriveInstance')
 
 
@@ -17,14 +18,16 @@ exports.folderCreate = async (drive, data) => {
     })
         .then(res => {
             const folderId = res.data.id
-            console.log(new Date().toJSON(), 'folderCreate', folderId)
+            Logger.logOk(`folderCreate ${folderId}`)
+            // console.log(new Date().toJSON(), 'folderCreate', folderId)
             return {
                 status: responseTypes.Created,
                 data: {folderId}
             }
         })
         .catch(e => {
-            console.log(new Date().toJSON(), 'folderCreate FAILED', folderName)
+            Logger.logError(`folderCreate FAILED ${folderName}`)
+            // console.log(new Date().toJSON(), 'folderCreate FAILED', folderName)
             return {
                 status: responseTypes.NotFound
             }

@@ -1,5 +1,6 @@
 const fileTypes = require('../../consts/fileTypes')
 const responseTypes = require('../../consts/responseTypes')
+const {Logger} = require("../Logger");
 // const drive = require('../../config/gdriveInstance')
 
 // instancja googleDrive oraz ID folderu, który ma być usunięty
@@ -9,13 +10,15 @@ exports.folderDelete = async (drive, data) => {
         fileId: folderId
     })
         .then(res => {
-            console.log(new Date().toJSON(), 'folderDelete', folderId)
+            Logger.logWarn(`folderDelete ${folderId}`)
+            // console.log(new Date().toJSON(), 'folderDelete', folderId)
             return {
                 status: responseTypes.NoContent
             }
         })
         .catch(e => {
-            console.log(new Date().toJSON(), 'folderDelete FAILED', folderId)
+            Logger.logError(`folderDelete ${folderId} FAILED`)
+            // console.log(new Date().toJSON(), 'folderDelete FAILED', folderId)
             return {
                 status: responseTypes.NotFound
             }

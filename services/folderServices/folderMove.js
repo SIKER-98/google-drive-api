@@ -7,9 +7,6 @@ exports.folderMove = async (drive, data) => {
         fileId: folderId,
         addParents: newParentId,
         removeParents: [oldParentId]
-        // resource: {
-        //     parents: [newParentId]
-        // }
     })
         .then(res => {
             console.log(new Date().toJSON(), 'folderMove', folderId, oldParentId, newParentId)
