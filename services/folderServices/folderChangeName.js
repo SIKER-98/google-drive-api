@@ -13,14 +13,12 @@ exports.folderChangeName = async (drive, data) => {
     })
         .then(res => {
             Logger.logOk(`folderChangeName ${folderId}`)
-            // console.log(new Date().toJSON(), 'folderChangeName', folderId)
             return {
                 status: responseTypes.NoContent
             }
         })
         .catch(e => {
             Logger.logError(`folderChangeName ${folderId} FAILED`)
-            // console.log(new Date().toJSON(), 'folderChangeName FAILED', folderId)
             return {
                 status: responseTypes.NotFound
             }

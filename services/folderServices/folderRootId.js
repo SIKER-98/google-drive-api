@@ -10,15 +10,12 @@ exports.folderRootId = async (drive) => {
         .then(res => {
             const rootId = res.data.files.length > 0 ? res.data.files[0].parents[0] : 'null'
             Logger.logOk(`folderRootId`)
-            // console.log(new Date().toJSON(), 'folderRootId', rootId)
             return {
                 status: responseTypes.Ok,
                 data: {rootId}
             }
         })
         .catch(e => {
-            // console.log(e.message)
-            // console.log(new Date().toJSON(), 'folderRootId FAILED')
             Logger.logError('folderRootId FAILED')
             return {
                 status: responseTypes.NotFound,

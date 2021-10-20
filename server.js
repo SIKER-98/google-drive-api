@@ -20,8 +20,7 @@ server.use('/file', fileRoutes)
 
 server.use('/gdrive', gdriveRoutes)
 
-
-server.listen(5000, () => {
-    Logger.logInfo('Sever started on port:',5000)
+server.listen(8000, () => {
+    Logger.logInfo('Sever started on port: 8000')
 })
 

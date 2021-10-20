@@ -1,5 +1,6 @@
 const fileTypes = require('../../consts/fileTypes')
 const responseTypes = require('../../consts/responseTypes')
+const {Logger} = require("../Logger");
 
 exports.folderMove = async (drive, data) => {
     const {folderId, newParentId, oldParentId} = data
@@ -9,13 +10,13 @@ exports.folderMove = async (drive, data) => {
         removeParents: [oldParentId]
     })
         .then(res => {
-            console.log(new Date().toJSON(), 'folderMove', folderId, oldParentId, newParentId)
+            Logger.logOk(`folderMove ${folderId}`)
             return {
                 status: responseTypes.NoContent
             }
         })
         .catch(e => {
-            console.log(new Date().toJSON(), 'folderMove FAILED', folderId, oldParentId, newParentId)
+            Logger.logError(`folderMove ${folderId} FAILED`)
             return {
                 status: responseTypes.NotFound
             }

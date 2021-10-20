@@ -12,9 +12,10 @@ const {folderDelete} = require("../services/folderServices/folderDelete");
 const {folderChangeName} = require("../services/folderServices/folderChangeName");
 const {folderGet} = require("../services/folderServices/folderGet");
 
+// pobranie wszystkich folderow z danego dysku
 exports.getFolders = async (req, res) => {
     try {
-        const gdrive = req.params.gdrive
+        const {gdrive} = req.params
         const response = await gDriveAuthorisation(gdrive, folderGet)
         return res.status(response.status).json({data: response.data})
     } catch (e) {

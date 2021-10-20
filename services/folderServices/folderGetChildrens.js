@@ -19,7 +19,7 @@ exports.folderGetChildrens = async (drive, data) => {
             }
         })
         .catch(e => {
-            // Logger.logError('folderGetChildren FAILED')
+            Logger.logError('folderGetChildren FAILED')
             // console.log(new Date().toJSON(), 'folderGetChildren FAILED')
             return {
                 status: responseTypes.NotFound

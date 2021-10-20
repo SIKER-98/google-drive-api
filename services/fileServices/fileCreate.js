@@ -2,7 +2,8 @@ const fileTypes = require('../../consts/fileTypes')
 const responseTypes = require('../../consts/responseTypes')
 // const drive = require('../../config/gdriveInstance')
 
-exports.fileCreate = async (fileName, content, folderId) => {
+exports.fileCreate = async (drive, data) => {
+    const {fileName, content, folderId} = data
     return await drive.files.create({
         resource: {
             name: fileName,

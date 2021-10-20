@@ -11,14 +11,12 @@ exports.folderDelete = async (drive, data) => {
     })
         .then(res => {
             Logger.logWarn(`folderDelete ${folderId}`)
-            // console.log(new Date().toJSON(), 'folderDelete', folderId)
             return {
                 status: responseTypes.NoContent
             }
         })
         .catch(e => {
             Logger.logError(`folderDelete ${folderId} FAILED`)
-            // console.log(new Date().toJSON(), 'folderDelete FAILED', folderId)
             return {
                 status: responseTypes.NotFound
             }

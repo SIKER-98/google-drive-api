@@ -1,5 +1,6 @@
 const {Router} = require('express')
 const folderOperations = require('../controllers/folderController')
+const fileOperations = require('../controllers/fileController')
 const driveOperations = require("../controllers/driveController");
 
 const router = Router()
@@ -45,6 +46,22 @@ router.get('/:gdrive/folder/:folderId', folderOperations.getFolderChildren)
 
 // usuniecie folderu
 router.delete('/:gdrive/folder/:folderId', folderOperations.deleteFolder)
+
+
+//
+// FILE
+
+// zmiana nazwy pliku
+router.put('/:gdrive/file/fileName', fileOperations.updateFileName)
+
+// stworzenie pliku
+router.post('/:gdrive/file', fileOperations.createFile)
+
+// usuniecie pliku
+router.delete('/:gdrive/file/:fileId', fileOperations.deleteFile)
+
+// przeniesienie pliku
+router.put('/:gdrive/file/parent', fileOperations.moveFile)
 
 
 router.use((req, res) => {
