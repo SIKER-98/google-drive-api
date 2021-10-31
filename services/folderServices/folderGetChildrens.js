@@ -7,7 +7,7 @@ exports.folderGetChildrens = async (drive, data) => {
 
     return await drive.files.list({
         q: `'${folderId}' in parents`,
-        fields: ' files(id,name,parents,createdTime,mimeType,trashed, explicitlyTrashed,folderColorRgb,modifiedTime)',
+        fields: ' files(id,name,parents,createdTime,mimeType,trashed, explicitlyTrashed,folderColorRgb,modifiedTime,size,folderColorRgb,permissions)',
     })
         .then(res => {
             const fileList = res.data.files

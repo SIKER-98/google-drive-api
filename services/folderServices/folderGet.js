@@ -4,9 +4,10 @@ const {Logger} = require("../Logger");
 // const drive = require('../../config/gdriveInstance')
 
 exports.folderGet = async (drive) => {
+
     return await drive.files.list({
         q: `mimeType='${fileTypes.FOLDER}'`,
-        fields: ' files(id,name,parents,createdTime,mimeType,trashed, explicitlyTrashed,folderColorRgb,modifiedTime)',
+        fields: ' files(id,name,parents,createdTime,mimeType,trashed, explicitlyTrashed,folderColorRgb,modifiedTime, size)',
     })
         .then(res => {
             const files = res.data.files

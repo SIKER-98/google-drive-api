@@ -1,4 +1,5 @@
 const responseTypes = require("../consts/responseTypes");
+const {filePublicUrl} = require("../services/fileServices/filePublicUrl");
 const {fileDelete} = require("../services/fileServices/fileDelete");
 const {fileMove} = require("../services/fileServices/fileMove");
 const {fileChangeName} = require("../services/fileServices/fileChangeName");
@@ -68,6 +69,19 @@ exports.moveFile = async (req, res) => {
             error: e,
             message: 'Problem with fileController-moveFile'
         })
+    }
+}
+
+exports.getFilePublicURL = async (req, res) => {
+    try {
+        const {gdrive,fileId} = req.params
+        // const {fileId} = req.body
+
+        const response = await gDriveAuthorisation(gdrive, filePublicUrl, {fileId})
+        return res.status(response.status).json(response.data)
+    } catch (e) {
+        Logger.logError(`fileController-getFilePublicURL`)
+        return res.status(responseTypes.InternalServerError).json({})
     }
 }
 

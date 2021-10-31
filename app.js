@@ -152,26 +152,4 @@ async function getFile() {
                     .pipe(dest)
             })
         })
-
-    // console.log(res)
 }
-
-function getChildren(id) {
-    return new Promise((resolve, reject) => {
-        drive.files.list({q: `'${id}' in parents`},
-            (err, data) => {
-            if (err) return reject(err)
-            console.log('your files', data.data)
-            resolve(data)
-        })
-    })
-}
-
-// uploadFile()
-// deleteFile()
-// generatePublicUrl()
-// listFolders()
-// createFile()
-// getFile()
-// getFolderChildren()
-getChildren('1rFJ1j1UTPE33CvgtB5OvQ4THlFUZzkZl')

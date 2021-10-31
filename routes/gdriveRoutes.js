@@ -47,6 +47,8 @@ router.get('/:gdrive/folder/:folderId', folderOperations.getFolderChildren)
 // usuniecie folderu
 router.delete('/:gdrive/folder/:folderId', folderOperations.deleteFolder)
 
+// udostepnianie
+router.put('/:gdrive/folder/share', folderOperations.folderShare)
 
 //
 // FILE
@@ -62,6 +64,9 @@ router.delete('/:gdrive/file/:fileId', fileOperations.deleteFile)
 
 // przeniesienie pliku
 router.put('/:gdrive/file/parent', fileOperations.moveFile)
+
+// pobranie linkow
+router.get('/:gdrive/file/publicURL/:fileId', fileOperations.getFilePublicURL)
 
 
 router.use((req, res) => {

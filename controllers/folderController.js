@@ -2,6 +2,7 @@
 
 const fileTypes = require('../consts/fileTypes')
 const responseTypes = require("../consts/responseTypes");
+const {folderShare} = require("../services/folderServices/folderShare");
 const {folderMove} = require("../services/folderServices/folderMove");
 const {folderChangeColor} = require("../services/folderServices/folderChangeColor");
 const {folderGetChildrens} = require("../services/folderServices/folderGetChildrens");
@@ -134,6 +135,21 @@ exports.getFolderChildren = async (req, res) => {
         return res.status(responseTypes.InternalServerError).json({
             error: e,
             message: 'Problem with folderController-getFolderChildren'
+        })
+    }
+}
+
+exports.folderShare = async (req, res) => {
+    try {
+        const {gdrive} = req.params
+        const {folderId, role} = req.body
+
+        const response = await gDriveAuthorisation(gdrive, folderShare, {folderId, role})
+        return res.status(responseTypes.Created).json({data: response.data})
+    } catch (e) {
+        return res.status(responseTypes.InternalServerError).json({
+            error: e,
+            message: 'Problem with folderController-pullFolderShare'
         })
     }
 }
