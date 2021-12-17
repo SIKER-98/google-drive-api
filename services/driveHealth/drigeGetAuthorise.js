@@ -16,10 +16,9 @@ exports.driveGetAuthorise = async (gdrive, authCode) => {
         return {status: responseTypes.InternalServerError}
     }
 
-    const response = await oAuth2Client.getToken(authCode)
+    return await oAuth2Client.getToken(authCode)
         .then(res => {
             const token = res.tokens
-
             return readFile('./config/gtoken.json')
                 .then(data => {
                     const readToken = JSON.parse(data)
@@ -36,8 +35,6 @@ exports.driveGetAuthorise = async (gdrive, authCode) => {
             console.log(new Date().toJSON(), 'driveGetAuthorise', 'ERROR retrieving access token')
             return {status: responseTypes.InternalServerError}
         })
-
-    return response
 }
 
 async function getOAuth2Client() {

@@ -16,6 +16,7 @@ exports.driveAuthorise = async (gdrive) => {
             const authUrl = oAuth2Client.generateAuthUrl({
                 access_type: 'offline',
                 scope: SCOPES,
+                prompt: "consent"
             });
             return {
                 status: responseTypes.Ok,

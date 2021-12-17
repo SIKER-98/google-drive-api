@@ -20,6 +20,10 @@ router.get('/:gdrive/authorise', driveOperations.authoriseGoogleDrive)
 // zautoryzowanie dysku
 router.post('/:gdrive/authorise', driveOperations.getAuthoriseGoogleDrive)
 
+// pobranie info o dysku
+router.get('/:gdrive/storage', driveOperations.getDriveStorage)
+
+
 //
 // FOLDERS
 
@@ -67,6 +71,9 @@ router.put('/:gdrive/file/parent', fileOperations.moveFile)
 
 // pobranie linkow
 router.get('/:gdrive/file/publicURL/:fileId', fileOperations.getFilePublicURL)
+
+// wyslanie pliku
+router.post('/:gdrive/upload/:folderId', fileOperations.postUpload)
 
 
 router.use((req, res) => {

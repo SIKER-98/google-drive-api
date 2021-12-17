@@ -1,4 +1,5 @@
 const responseTypes = require("../consts/responseTypes");
+const {fileUpload} = require("../services/fileServices/fileUpload");
 const {filePublicUrl} = require("../services/fileServices/filePublicUrl");
 const {fileDelete} = require("../services/fileServices/fileDelete");
 const {fileMove} = require("../services/fileServices/fileMove");
@@ -74,13 +75,25 @@ exports.moveFile = async (req, res) => {
 
 exports.getFilePublicURL = async (req, res) => {
     try {
-        const {gdrive,fileId} = req.params
+        const {gdrive, fileId} = req.params
         // const {fileId} = req.body
 
         const response = await gDriveAuthorisation(gdrive, filePublicUrl, {fileId})
         return res.status(response.status).json(response.data)
     } catch (e) {
         Logger.logError(`fileController-getFilePublicURL`)
+        return res.status(responseTypes.InternalServerError).json({})
+    }
+}
+
+exports.postUpload = async (req, res) => {
+    try {
+        const {gdrive, folderId} = req.params
+
+        const response = await gDriveAuthorisation(gdrive, fileUpload, {folderId, req, res})
+        // return res.status(response.status).json(response.data)
+    } catch (e) {
+        Logger.logError(`fileController-postUpload`)
         return res.status(responseTypes.InternalServerError).json({})
     }
 }

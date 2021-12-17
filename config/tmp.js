@@ -16,7 +16,7 @@ exports.authorizeGoogleDrive = (gdrive, callback) => {
         fs.readFile(TOKEN_PATH, (err, token) => {
             if (err) return getAccessToken(oAuth2Client, gdrive, {}, callback)
             const readToken = JSON.parse(token)
-            console.log('readToken: ', readToken)
+            // console.log('readToken: ', readToken)
 
             if (!readToken[gdrive]) return getAccessToken(oAuth2Client, gdrive, readToken, callback)
 

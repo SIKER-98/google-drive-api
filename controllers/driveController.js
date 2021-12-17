@@ -1,4 +1,6 @@
 const responseTypes = require("../consts/responseTypes");
+const {gDriveAuthorisation} = require("../services/gDriveAuthorisation");
+const {driveStorage} = require("../services/driveHealth/driveStorage");
 const {driveGetAuthorise} = require("../services/driveHealth/drigeGetAuthorise");
 const {driveAuthorise} = require("../services/driveHealth/driveAuthorise");
 const {driveState} = require("../services/driveHealth/driveState");
@@ -55,6 +57,20 @@ exports.getAuthoriseGoogleDrive = async (req, res) => {
         return res.status(responseTypes.InternalServerError).json({
             error: e,
             message: 'Problem with driveController-getAuthoriseGoogleDrive'
+        })
+    }
+}
+
+exports.getDriveStorage = async (req, res) => {
+    try {
+        const gdrive = req.params.gdrive
+        const response = await gDriveAuthorisation(gdrive, driveStorage)
+
+        return res.status(response.status).json(response.drive)
+    } catch (e) {
+        return res.status(responseTypes.InternalServerError).json({
+            error: e,
+            message: 'Problem with driveController-getDriveStorage'
         })
     }
 }

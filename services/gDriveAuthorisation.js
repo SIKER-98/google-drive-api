@@ -16,7 +16,8 @@ exports.gDriveAuthorisation = async (gdrive, callback, data) => {
     return await readFile(TOKEN_PATH)
         .then(async res => {
             const token = JSON.parse(res)
-            // console.log('readToken: ', token)
+
+            // console.log('readToken: ', token[gdrive])
 
             if (!token[gdrive]) return {status: responseTypes.Unauthorized}
 

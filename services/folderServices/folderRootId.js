@@ -12,11 +12,12 @@ exports.folderRootId = async (drive) => {
             Logger.logOk(`folderRootId`)
             return {
                 status: responseTypes.Ok,
-                data: {rootId}
+                data: {rootId},
             }
         })
         .catch(e => {
             Logger.logError('folderRootId FAILED')
+            console.log(e)
             return {
                 status: responseTypes.NotFound,
                 error: e,

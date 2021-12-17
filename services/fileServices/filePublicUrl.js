@@ -9,7 +9,7 @@ exports.filePublicUrl = async (drive, data) => {
     return await drive.permissions.create({
         fileId: fileId,
         requestBody: {
-            role: 'reader',
+            role: 'writer',
             type: 'anyone'
         }
     })
@@ -17,8 +17,8 @@ exports.filePublicUrl = async (drive, data) => {
             Logger.logWarn(`permission CREATED ${fileId}`)
             return await drive.files.get({
                 fileId: fileId,
-                // fields: 'webContentLink, webViewLink'
-                fields: '*'
+                fields: 'webContentLink, webViewLink'
+                // fields: '*'
             })
                 .then(res => {
                     Logger.logOk(`publicLink GENERATED ${fileId}`)
