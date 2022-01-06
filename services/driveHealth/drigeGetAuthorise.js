@@ -22,6 +22,7 @@ exports.driveGetAuthorise = async (gdrive, authCode) => {
             return readFile('./config/gtoken.json')
                 .then(data => {
                     const readToken = JSON.parse(data)
+                    readToken[gdrive] = null
                     readToken[gdrive] = token
 
                     return writeTokenToFile(readToken, gdrive)
