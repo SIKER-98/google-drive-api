@@ -17,8 +17,6 @@ exports.gDriveAuthorisation = async (gdrive, callback, data) => {
         .then(async res => {
             const token = JSON.parse(res)
 
-            // console.log('readToken: ', token[gdrive])
-
             if (!token[gdrive]) return {status: responseTypes.Unauthorized}
 
             oAuth2Client.setCredentials(token[gdrive])

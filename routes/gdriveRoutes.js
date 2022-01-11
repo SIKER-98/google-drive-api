@@ -78,6 +78,9 @@ router.post('/:gdrive/upload/:folderId', fileOperations.postUpload)
 // pobranie pliku
 router.get('/:gdrive/download/:fileId/:fileName', fileOperations.getDownloadFile)
 
+// pobranie pliku
+router.get('/:gdrive/search/:fileName', fileOperations.getSearchFile)
+
 
 router.use((req, res) => {
     res.status(404).json({
